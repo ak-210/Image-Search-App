@@ -8,7 +8,7 @@ var moreBtn = document.getElementById("more-btn");
 let page = 1;
 
 async function showResults(){
-    const url = `https://api.unsplash.com/search/photos?query=${input.value}&page=${page}&client_id=${key}`;
+    const url = `https://api.unsplash.com/search/photos?query=${input.value}&page=${page}&orientation=landscape&client_id=${key}`;
 
     const res = await fetch(url)
     const data = await res.json()
@@ -45,5 +45,26 @@ form.addEventListener("submit", (e) => {
 
 moreBtn.addEventListener("click", showResults);
 
+async function randomPhoto(){
+    const url = `https://api.unsplash.com/photos/random?count=3&orientation=landscape&client_id=${key}`;
 
+    const res = await fetch(url)
+    const results = await res.json()
+    var final_html = ''
+
+    results.map((result) => {
+        var html = `
+        <div class="card">
+            <a href=${result.links.html} target="_blank">
+                <img src=${result.urls.small} alt=${result.alt_description}>
+                <span>${result.alt_description}</span>
+            </a>
+        </div>
+        `
+        final_html += html;
+    })
+
+    cont.innerHTML += final_html
+};
+randomPhoto()
 
