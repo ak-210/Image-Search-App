@@ -4,6 +4,7 @@ var form = document.querySelector("form");
 var input = document.getElementById("searchInput");
 var cont = document.getElementById("result-container");
 var moreBtn = document.getElementById("more-btn");
+var topBtn = document.getElementById("top");
 
 let page = 1;
 
@@ -35,6 +36,7 @@ async function showResults(){
     cont.innerHTML += final_html
     page++;
     moreBtn.style.opacity = 1;
+    topBtn.style.opacity = 0.3;
 };
 
 form.addEventListener("submit", (e) => {
